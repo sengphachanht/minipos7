@@ -19963,10 +19963,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Minipos7Store',
   data: function data() {
-    return {};
+    return {
+      FormShow: false
+    };
   },
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    add_store: function add_store() {
+      this.FormShow = true;
+    },
+    close: function close() {
+      this.FormShow = false;
+    }
+  }
 });
 
 /***/ }),
@@ -20461,10 +20470,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, " Store Page ", -1 /* HOISTED */);
-var _hoisted_2 = [_hoisted_1];
+var _hoisted_1 = {
+  "class": "card"
+};
+var _hoisted_2 = {
+  "class": "d-flex justify-content-between"
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "card-header"
+}, "ສະຕ໋ອກສິນຄ້າ", -1 /* HOISTED */);
+var _hoisted_4 = {
+  "class": "me-4 pt-3"
+};
+var _hoisted_5 = {
+  key: 0,
+  type: "button",
+  "class": "btn rounded-pill btn-success me-2"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"table-responsive text-nowrap\"><table class=\"table\"><thead><tr><th>ID</th><th>ຮູບ</th><th>ຊື່ສິນຄ້າ</th><th>ລາຄາຊື້</th><th>ຈັດການ</th></tr></thead><tbody class=\"table-border-bottom-0\"><tr><td><i class=\"fab fa-angular fa-lg text-danger me-3\"></i> <strong>Angular Project</strong></td><td>Albert Cook</td><td><ul class=\"list-unstyled users-list m-0 avatar-group d-flex align-items-center\"><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Lilian Fuller\"><img src=\"assets/img/avatars/5.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Sophia Wilkerson\"><img src=\"assets/img/avatars/6.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Christina Parker\"><img src=\"assets/img/avatars/7.png\" alt=\"Avatar\" class=\"rounded-circle\"></li></ul></td><td><span class=\"badge bg-label-primary me-1\">Active</span></td><td><div class=\"dropdown\"><button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\"><i class=\"bx bx-dots-vertical-rounded\"></i></button><div class=\"dropdown-menu\"><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-edit-alt me-1\"></i> Edit</a><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-trash me-1\"></i> Delete</a></div></div></td></tr><tr><td><i class=\"fab fa-react fa-lg text-info me-3\"></i> <strong>React Project</strong></td><td>Barry Hunter</td><td><ul class=\"list-unstyled users-list m-0 avatar-group d-flex align-items-center\"><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Lilian Fuller\"><img src=\"assets/img/avatars/5.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Sophia Wilkerson\"><img src=\"assets/img/avatars/6.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Christina Parker\"><img src=\"assets/img/avatars/7.png\" alt=\"Avatar\" class=\"rounded-circle\"></li></ul></td><td><span class=\"badge bg-label-success me-1\">Completed</span></td><td><div class=\"dropdown\"><button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\"><i class=\"bx bx-dots-vertical-rounded\"></i></button><div class=\"dropdown-menu\"><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-edit-alt me-2\"></i> Edit</a><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-trash me-2\"></i> Delete</a></div></div></td></tr><tr><td><i class=\"fab fa-vuejs fa-lg text-success me-3\"></i> <strong>VueJs Project</strong></td><td>Trevor Baker</td><td><ul class=\"list-unstyled users-list m-0 avatar-group d-flex align-items-center\"><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Lilian Fuller\"><img src=\"assets/img/avatars/5.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Sophia Wilkerson\"><img src=\"assets/img/avatars/6.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Christina Parker\"><img src=\"assets/img/avatars/7.png\" alt=\"Avatar\" class=\"rounded-circle\"></li></ul></td><td><span class=\"badge bg-label-info me-1\">Scheduled</span></td><td><div class=\"dropdown\"><button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\"><i class=\"bx bx-dots-vertical-rounded\"></i></button><div class=\"dropdown-menu\"><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-edit-alt me-2\"></i> Edit</a><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-trash me-2\"></i> Delete</a></div></div></td></tr><tr><td><i class=\"fab fa-bootstrap fa-lg text-primary me-3\"></i> <strong>Bootstrap Project</strong></td><td>Jerry Milton</td><td><ul class=\"list-unstyled users-list m-0 avatar-group d-flex align-items-center\"><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Lilian Fuller\"><img src=\"assets/img/avatars/5.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Sophia Wilkerson\"><img src=\"assets/img/avatars/6.png\" alt=\"Avatar\" class=\"rounded-circle\"></li><li data-bs-toggle=\"tooltip\" data-popup=\"tooltip-custom\" data-bs-placement=\"top\" class=\"avatar avatar-xs pull-up\" title=\"\" data-bs-original-title=\"Christina Parker\"><img src=\"assets/img/avatars/7.png\" alt=\"Avatar\" class=\"rounded-circle\"></li></ul></td><td><span class=\"badge bg-label-warning me-1\">Pending</span></td><td><div class=\"dropdown\"><button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\"><i class=\"bx bx-dots-vertical-rounded\"></i></button><div class=\"dropdown-menu\"><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-edit-alt me-2\"></i> Edit</a><a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-trash me-2\"></i> Delete</a></div></div></td></tr></tbody></table></div>", 1);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_2);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$data.FormShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_5, "ບັນທຶກ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.FormShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 1,
+    type: "button",
+    "class": "btn rounded-pill btn-danger",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.close();
+    })
+  }, "ຍົກເລີກ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$data.FormShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 2,
+    type: "button",
+    "class": "btn rounded-pill btn-info",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.add_store();
+    })
+  }, "ເພິ່ມ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.FormShow) + " ", 1 /* TEXT */), _hoisted_6])]);
 }
 
 /***/ }),
