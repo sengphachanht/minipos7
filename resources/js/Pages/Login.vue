@@ -109,10 +109,7 @@ export default {
         
         login(){
 
-            this.$axios.post("api/login",{
-                        email: this.email,
-                        password: this.password
-                    }).then((response)=>{
+            this.$axios.post("api/login",{email: this.email, password: this.password}).then((response)=>{
 
                         if(response.data.success){
                             this.show_error = false;
@@ -121,15 +118,16 @@ export default {
                             this.email = ''
                             this.password = ''
 
-                            this.$storage.setStorageSync("vue-isLoggin",true);
+                            this.$storage.setStorageSync("vue-isLogin",true);
 
-                            window.location.href = "/store"
+                            // window.location.href = "/store"
+
+                            window.location.reload();
 
                             // this.$router.push('login');
 
                         } else {
-
-                                                 
+                 
                             this.show_error = true;
                             this.Text_error = response.data.message;
 

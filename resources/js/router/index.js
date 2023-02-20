@@ -57,13 +57,13 @@ router.beforeEach((to, from, next)=> {
     if(to.path=="/register"){
         next()
     } else {
-        if(to.path!="/login" && !storage.getStorageSync("vue-isLoggin") && !window.Laravel.isLoggin){
+        if(to.path!="/login" && !storage.getStorageSync("vue-isLogin") && !window.Laravel.isLogin){
             next({
                 path:"/login",
                 replace: true
             })
         } else {
-            if(to.path!="/login" && storage.getStorageSync("vue-isLoggin") && window.Laravel.isLoggin){
+            if(to.path!="/login" && storage.getStorageSync("vue-isLogin") && window.Laravel.isLogin){
                 next({
                     path:"/store",
                     replace: true

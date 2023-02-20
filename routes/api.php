@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use APp\Http\Controllers\StoreController;
+
 
 
 /*
@@ -24,3 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post("register",[UserController::class,"register"]);
 Route::post("login",[UserController::class,"login"]);
 Route::post("logout",[UserController::class,"logout"]);
+
+
+Route::group(['prefix' =>'store'], function(){
+    Route::get("/",[UserController::class,"index"]);
+    Route::get("/edit/{id}",[UserController::class,"edit"]);
+    Route::post("add",[UserController::class,"add"]);
+});
+

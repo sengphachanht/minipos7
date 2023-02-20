@@ -229,7 +229,7 @@ export default {
 
                  if(response.data.success){
 
-                    this.$storage.setStorageSync("vue-isLoggin",false);
+                    this.$storage.setStorageSync("vue-isLogin",false);
 
                     window.location.href = window.location,href.replace(/#.*$/,'');
 
@@ -246,10 +246,10 @@ export default {
 
     // },
     created(){
-        console.log('Vue3 storage: ' + this.$storage.getStorageSync("vue-isLoggin"))
-        console.log('isLoggin:' + window.Laravel.isLoggin)
+        console.log('Vue3 storage: ' + this.$storage.getStorageSync("vue-isLogin"))
+        console.log('isLogin:' + window.Laravel.isLogin)
 
-        if(window.Laravel.isLoggin){
+        if(window.Laravel.isLogin){
             this.check_login = true
         } else {
             this.check_login = false
