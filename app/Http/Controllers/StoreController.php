@@ -24,12 +24,21 @@ class StoreController extends Controller
 
         try{
 
-            $store = new Store();
-            $store->name = $request->name;
-            $store->amount = $request->amount;
-            $store->price_buy = $request->price_buy;
-            $store->price_sell = $request->price_sell;
-            $store->save();
+            // $store = new Store();
+            // $store->name = $request->name;
+            // $store->amount = $request->amount;
+            // $store->price_buy = $request->price_buy;
+            // $store->price_sell = $request->price_sell;
+            // $store->save();
+
+                $store = Store::find($id);
+                $store->update([
+                    'name'=>$request->name,
+                    'amount'=>$request->amount,
+                    'price_buy'=>$request->price_buy,
+                    'price_sell'=>$request->price_sell,
+                    
+                ]);
 
 
                 $success = true;
@@ -50,6 +59,10 @@ class StoreController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function update($id, Request $request){
+
     }
 
 }

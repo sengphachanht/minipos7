@@ -138,6 +138,26 @@ export default {
             if(this.FormType){
                 //ທຳການອັບເດດ
 
+                // console.log('update')
+
+                 let formDataStore = new FormData();
+                formDataStore.append("name", this.FormStore.name);
+                formDataStore.append("amount", this.FormStore.amount);
+                formDataStore.append("price_buy", this.FormStore.price_buy);
+                formDataStore.append("price_sell", this.FormStore.price_sell);
+                // formDataStore.append("id", this.EditID);
+
+                this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+                this.$axios.post(`api/store/update/${this.EditID}`, formDataStore).then((response)=>{
+                    this.getStore()
+                    this.FormShow = false 
+
+                    // console.log(response.data)
+                }).catch((error)=>{
+                    console.log(error)
+                })
+            })
+
             } else {
                 // ບັນທຶກຂໍ້ມູນໃໝ່
 
@@ -147,6 +167,7 @@ export default {
                 formDataStore.append("price_buy", this.FormStore.price_buy);
                 formDataStore.append("price_sell", this.FormStore.price_sell);
 
+                this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
                 this.$axios.post("api/store/add", formDataStore).then((response)=>{
                     this.getStore()
                     this.FormShow = false 
@@ -154,6 +175,8 @@ export default {
                 }).catch((error)=>{
                     console.log(error)
                 })
+            })
+            
             }
 
             this.FormStore.name = ''
@@ -163,9 +186,14 @@ export default {
 
         },
         edit_store(id){
+
+            //ກຳນົດຄ່າໃຫ້ທຳການອັບເດດ
+            this.FormType = true
+
             // console.log(id)
             // ເກັບ id ໄວ້ອັບເດດຂໍ້ມູນ
             this.EditID = id
+            this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
             this.$axios.get(`api/store/edit/${id}`).then((response)=>{
 
                     this.FormStore.name = response.data.name
@@ -179,18 +207,31 @@ export default {
                 }).catch((error)=>{
                     console.log(error)
                 })
+            })
         },
         delete_store(id){
             console.log(id)
         },
         getStore(){
-            this.$axios.get("api/store").then((response)=>{
+
+            this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+                 this.$axios.get("api/store").then((response)=>{
                 this.StoreData = response.data
                 // console.log(response.data)
 
-            }).catch((error)=>{
+                    }).catch((error)=>{
                     console.log(error)
-                })
+                    // console.log(error.response.status)
+                    if(error.response.status==401){
+                        this.$storage.setStorageSync("vue-isLogin",false);
+                        location.reload()
+                    }
+
+                    })
+
+            })
+
+           
 
             
         }

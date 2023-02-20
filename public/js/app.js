@@ -20000,20 +20000,42 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       if (this.FormType) {
         //ທຳການອັບເດດ
-      } else {
-        // ບັນທຶກຂໍ້ມູນໃໝ່
+
+        // console.log('update')
 
         var formDataStore = new FormData();
         formDataStore.append("name", this.FormStore.name);
         formDataStore.append("amount", this.FormStore.amount);
         formDataStore.append("price_buy", this.FormStore.price_buy);
         formDataStore.append("price_sell", this.FormStore.price_sell);
-        this.$axios.post("api/store/add", formDataStore).then(function (response) {
-          _this.getStore();
-          _this.FormShow = false;
-          console.log(response.data);
-        })["catch"](function (error) {
-          console.log(error);
+        // formDataStore.append("id", this.EditID);
+
+        this.$axios.get("/sanctum/csrf-cookie").then(function (response) {
+          _this.$axios.post("api/store/update/".concat(_this.EditID), formDataStore).then(function (response) {
+            _this.getStore();
+            _this.FormShow = false;
+
+            // console.log(response.data)
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        });
+      } else {
+        // ບັນທຶກຂໍ້ມູນໃໝ່
+
+        var _formDataStore = new FormData();
+        _formDataStore.append("name", this.FormStore.name);
+        _formDataStore.append("amount", this.FormStore.amount);
+        _formDataStore.append("price_buy", this.FormStore.price_buy);
+        _formDataStore.append("price_sell", this.FormStore.price_sell);
+        this.$axios.get("/sanctum/csrf-cookie").then(function (response) {
+          _this.$axios.post("api/store/add", _formDataStore).then(function (response) {
+            _this.getStore();
+            _this.FormShow = false;
+            console.log(response.data);
+          })["catch"](function (error) {
+            console.log(error);
+          });
         });
       }
       this.FormStore.name = '';
@@ -20023,18 +20045,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     edit_store: function edit_store(id) {
       var _this2 = this;
+      //ກຳນົດຄ່າໃຫ້ທຳການອັບເດດ
+      this.FormType = true;
+
       // console.log(id)
       // ເກັບ id ໄວ້ອັບເດດຂໍ້ມູນ
       this.EditID = id;
-      this.$axios.get("api/store/edit/".concat(id)).then(function (response) {
-        _this2.FormStore.name = response.data.name;
-        _this2.FormStore.amount = response.data.amount;
-        _this2.FormStore.price_buy = response.data.price_buy;
-        _this2.FormStore.price_sell = response.data.price_sell;
-        console.log(response.data);
-        _this2.FormShow = true;
-      })["catch"](function (error) {
-        console.log(error);
+      this.$axios.get("/sanctum/csrf-cookie").then(function (response) {
+        _this2.$axios.get("api/store/edit/".concat(id)).then(function (response) {
+          _this2.FormStore.name = response.data.name;
+          _this2.FormStore.amount = response.data.amount;
+          _this2.FormStore.price_buy = response.data.price_buy;
+          _this2.FormStore.price_sell = response.data.price_sell;
+          console.log(response.data);
+          _this2.FormShow = true;
+        })["catch"](function (error) {
+          console.log(error);
+        });
       });
     },
     delete_store: function delete_store(id) {
@@ -20042,11 +20069,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     getStore: function getStore() {
       var _this3 = this;
-      this.$axios.get("api/store").then(function (response) {
-        _this3.StoreData = response.data;
-        // console.log(response.data)
-      })["catch"](function (error) {
-        console.log(error);
+      this.$axios.get("/sanctum/csrf-cookie").then(function (response) {
+        _this3.$axios.get("api/store").then(function (response) {
+          _this3.StoreData = response.data;
+          // console.log(response.data)
+        })["catch"](function (error) {
+          console.log(error);
+          // console.log(error.response.status)
+          if (error.response.status == 401) {
+            _this3.$storage.setStorageSync("vue-isLogin", false);
+            location.reload();
+          }
+        });
       });
     }
   },
