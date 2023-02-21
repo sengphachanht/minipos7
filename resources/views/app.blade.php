@@ -43,16 +43,15 @@
     @if(Auth::check())
         @php
             $user_auth_data = [
-                'isLogin'=> true,
+                'isLoggin'=> true,
                 'user'=> Auth::user()
                 ];
         @endphp
 
-
     @else
         @php
             $user_auth_data = [
-                'isLogin'=> false,
+                'isLoggin'=> false,
                 'user'=> Auth::user()
                 ];
         @endphp

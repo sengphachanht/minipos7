@@ -246,10 +246,10 @@ export default {
 
     // },
     created(){
-        console.log('Vue3 storage: ' + this.$storage.getStorageSync("vue-isLogin"))
-        console.log('isLogin:' + window.Laravel.isLogin)
+        console.log('Vue3 storage: ' + this.$storage.getStorageSync("vue-isLoggin"))
+        console.log('isLoggin:' + window.Laravel.isLoggin)
 
-        if(window.Laravel.isLogin){
+        if(window.Laravel.isLoggin){
             this.check_login = true
         } else {
             this.check_login = false

@@ -2,23 +2,30 @@
     <div>
 
         <div class="card">
-
             <div class=" d-flex justify-content-between ">
                 <h5 class="card-header">ສະຕ໋ອກສິນຄ້າ</h5>
                 <div class=" me-4 pt-3 "> 
                     <!-- {{ check_butom }} -->
+
                     <button type="button" class="btn rounded-pill btn-success me-2 " v-if="FormShow" :disabled="check_butom" @click="save_store()">ບັນທຶກ</button>
                     <button type="button" class="btn rounded-pill btn-danger" v-if="FormShow" @click="close()">ຍົກເລີກ</button>
                     <button type="button" class="btn rounded-pill btn-info" @click="add_store()" v-if="!FormShow">ເພິ່ມ</button>
                 </div>
             </div>
 
-            {{ FormStore }}
+            <!-- {{ FormStore }} -->
 
 <div class="card-body" >
 
     <div class="row" v-if="FormShow"> 
-        <div class="col-md-4">111</div>
+        <div class="col-md-4 text-center">
+            <button type="button" class="btn rounded-pill btn-icon btn-danger bt-rm" @click="remove_image()" v-if="image_Product" >
+                 <i class='bx bx-x-circle fs-2'></i>
+              </button>
+        </div>
+        <img :src="imagePreview" style=" width: 80%;" alt="" srcset="">
+        <input type="file" class=" form-control mt-2" @change="onSelected">
+      
         <div class="col-md-8">
             <div class="md-2">
                 <label class="form-label">ຊື່ສິນຄ້າ</label>

@@ -54,16 +54,19 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=> {
 
+    // console.log(storage.getStorageSync("vue-isLoggin"))
+    // console.log(window.Laravel.isLoggin)
+
     if(to.path=="/register"){
         next()
     } else {
-        if(to.path!="/login" && !storage.getStorageSync("vue-isLogin") && !window.Laravel.isLogin){
+        if(to.path!="/login" && !storage.getStorageSync("vue-isLoggin") && !window.Laravel.isLoggin){
             next({
                 path:"/login",
                 replace: true
             })
         } else {
-            if(to.path!="/login" && storage.getStorageSync("vue-isLogin") && window.Laravel.isLogin){
+            if(to.path=="/login" && storage.getStorageSync("vue-isLoggin") && window.Laravel.isLoggin){
                 next({
                     path:"/store",
                     replace: true

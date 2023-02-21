@@ -25,9 +25,9 @@ Route::post("login",[UserController::class,"login"]);
 Route::post("logout",[UserController::class,"logout"]);
 
 Route::group(['prefix' =>'store','middleware'=>'auth:sanctum'], function(){
-    Route::get("/",[UserController::class,"index"]);
-    Route::get("/edit/{id}",[UserController::class,"edit"]);
-    Route::post("add",[UserController::class,"add"]);
-    Route::post("update/{id}",[UserController::class,"update"]);
+    Route::get("/",[StoreController::class,"index"]);
+    Route::get("/edit/{id}",[StoreController::class,"edit"]);
+    Route::post("add",[StoreController::class,"add"]);
+    Route::post("update/{id}",[StoreController::class,"update"]);
 });
 
