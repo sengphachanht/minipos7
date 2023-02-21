@@ -55,7 +55,7 @@ class UserController extends Controller
     public function login(Request $request){
 
         $check_user_login = [
-            "emaila"=>$request->email,
+            "email"=>$request->email,
             "password"=>$request->password
         ];
 
