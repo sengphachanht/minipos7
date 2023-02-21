@@ -3,7 +3,7 @@ import App from './App.vue'
 import Sidebar from './components/Sidebar.vue' 
 import router from './router'
 import axios from 'axios'
-import Vue3Storage from "vue3-storage";
+import Vue3Storage from "vue3-storage"
 
 require('./bootstrap');
 
