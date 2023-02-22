@@ -6,7 +6,7 @@
                 <h5 class="card-header">ສະຕ໋ອກສິນຄ້າ</h5>
                 <div class=" me-4 pt-3 "> 
                     <!-- {{ check_butom }} -->
-
+                    <!-- <button class=" btn btn-danger" @click="showAlert">Show</button> -->
                     <button type="button" class="btn rounded-pill btn-success me-2 " v-if="FormShow" :disabled="check_butom" @click="save_store()">ບັນທຶກ</button>
                     <button type="button" class="btn rounded-pill btn-danger" v-if="FormShow" @click="close()">ຍົກເລີກ</button>
                     <button type="button" class="btn rounded-pill btn-info" @click="add_store()" v-if="!FormShow">ເພິ່ມ</button>
@@ -23,8 +23,8 @@
                  <i class='bx bx-x-circle fs-2'></i>
               </button>
         </div>
-        <img :src="imagePreview" style=" width: 80%;" alt="" srcset="">
-        <input type="file" class=" form-control mt-2" @change="onSelected">
+        <!-- <img :src="imagePreview" style=" width: 80%;" alt="" srcset="">
+        <input type="file" class=" form-control mt-2" @change="onSelected"> -->
       
         <div class="col-md-8">
             <div class="md-2">
@@ -129,6 +129,16 @@ export default {
 
     methods: {
 
+        showAlert() {
+            // Use sweetalert2
+                this.$swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+                });
+        },
+
         add_store(){
 
             this.FormShow = true
@@ -156,6 +166,31 @@ export default {
 
                 this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
                 this.$axios.post(`api/store/update/${this.EditID}`, formDataStore).then((response)=>{
+
+                    if(response.data.success){
+
+                    this.$swal.fire({
+                        toast:true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.data.message,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                    } else {
+
+                    this.$swal.fire({
+                        // position: 'top-end',
+                        icon: 'error',
+                        title: 'ຜິດພາດ!',
+                        text: response.data.message,
+                        showConfirmButton: false,
+                        timer: 5500
+                    })
+
+                    }
+
                     this.getStore()
                     this.FormShow = false 
 
@@ -176,8 +211,33 @@ export default {
 
                 this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
                 this.$axios.post("api/store/add", formDataStore).then((response)=>{
-                    this.getStore()
-                    this.FormShow = false 
+
+                    if(response.data.success){
+
+                    this.$swal.fire({
+                        toast:true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.data.message,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                    } else {
+
+                    this.$swal.fire({
+                        // position: 'top-end',
+                        icon: 'error',
+                        title: 'ຜິດພາດ!',
+                        text: response.data.message,
+                        showConfirmButton: false,
+                        timer: 5500
+                    })
+
+                    }
+                    
+                    this.getStore() /// ອັບເດດລາຍການ
+                    this.FormShow = false // ປິດຟອມ 
                     console.log(response.data)
                 }).catch((error)=>{
                     console.log(error)
@@ -217,12 +277,84 @@ export default {
             })
         },
         delete_store(id){
-            console.log(id)
+            // console.log(id)
+
+                this.$swal.fire({
+                    title: 'ທ່ານແນ່ໃຈບໍ?',
+                    text: "ທີ່ຈະລຶບຂໍ້ຄວາມນີ້!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ຢືນຢັນ',
+                    cancelButtonText: 'ຍົກເລີກ'
+
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+
+                    this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+                        this.$axios.delete(`api/store/delete/${id}`).then((response)=>{
+
+                            if(response.data.success){
+
+                            this.$swal.fire({
+                                toast:true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.data.message,
+                                showConfirmButton: false,
+                                timer: 2500
+                            })
+
+                            } else {
+
+                            this.$swal.fire({
+                                // position: 'top-end',
+                                icon: 'error',
+                                title: 'ຜິດພາດ!',
+                                text: response.data.message,
+                                showConfirmButton: false,
+                                timer: 5500
+                            })
+
+                            }
+
+                            
+
+                            this.getStore()  /// ອັບເດດລາຍການ                 
+                            // this.FormShow = false 
+                            // console.log(response.data)
+                            }).catch((error)=>{
+                            console.log(error)
+                        })
+                    })
+
+                
+
+                        // this.$swal.fire(
+                        // 'Deleted!',
+                        // 'Your file has been deleted.',
+                        // 'success'
+                        // )
+                    }
+                })
+
+            // this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+            //     this.$axios.delete(`api/store/delete/${id}`).then((response)=>{
+
+
+            //         this.getStore()  /// ອັບເດດລາຍການ                 
+            //         // this.FormShow = false 
+            //         // console.log(response.data)
+            //     }).catch((error)=>{
+            //         console.log(error)
+            //     })
+            // })
         },
         getStore(){
 
             this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-                 this.$axios.get("api/store").then((response)=>{
+                this.$axios.get("api/store").then((response)=>{
                 this.StoreData = response.data
                 // console.log(response.data)
 
@@ -230,7 +362,7 @@ export default {
                     console.log(error)
                     // console.log(error.response.status)
                     if(error.response.status==401){
-                        this.$storage.setStorageSync("vue-isLogin",false);
+                        this.$storage.setStorageSync("vue-isLoggin",false);
                         location.reload()
                     }
 

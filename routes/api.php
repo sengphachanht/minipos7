@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use APp\Http\Controllers\StoreController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +29,6 @@ Route::group(['prefix' =>'store','middleware'=>'auth:sanctum'], function(){
     Route::get("/edit/{id}",[StoreController::class,"edit"]);
     Route::post("add",[StoreController::class,"add"]);
     Route::post("update/{id}",[StoreController::class,"update"]);
+    Route::delete("delete/{id}",[StoreController::class,"delete"]);
 });
 
