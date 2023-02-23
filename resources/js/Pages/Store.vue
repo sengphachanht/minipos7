@@ -1,7 +1,7 @@
 <template>
-    <div>
+<div>
 
-        <div class="card">
+    <div class="card">
             <div class=" d-flex justify-content-between ">
                 <h5 class="card-header">ສະຕ໋ອກສິນຄ້າ</h5>
                 <div class=" me-4 pt-3 "> 
@@ -19,13 +19,17 @@
 
     <div class="row" v-if="FormShow"> 
         <div class="col-md-4 text-center">
-            <button type="button" class="btn rounded-pill btn-icon btn-danger bt-rm" @click="remove_image()" v-if="image_Product" >
+            <div style="position: relative; ">
+                <button type="button" class="btn rounded-pill btn-icon btn-danger bt-rm" @click="remove_image()" v-if="image_Product" >
                  <i class='bx bx-x-circle fs-2'></i>
               </button>
+            </div>
+            
+            <img :src="imagePreview" style=" width: 80%;" alt="" srcset="">
+            <input type="file" class=" form-control mt-2" @change="onSelected">
+            
         </div>
-        <!-- <img :src="imagePreview" style=" width: 80%;" alt="" srcset="">
-        <input type="file" class=" form-control mt-2" @change="onSelected"> -->
-      
+
         <div class="col-md-8">
             <div class="md-2">
                 <label class="form-label">ຊື່ສິນຄ້າ</label>
@@ -34,17 +38,17 @@
 
             <div class="md-2">
                 <label class="form-label">ຈຳນວນ</label>
-                <input type="text" class="form-control" placeholder="...." v-model="FormStore.amount">
+                <cleave :options="options" class="form-control" placeholder="...." v-model="FormStore.amount"  />
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label">ລາຄາຊື້</label>
-                    <input type="text" class="form-control" placeholder="...." v-model="FormStore.price_buy">  
+                    <cleave :options="options" class="form-control" placeholder="...." v-model="FormStore.price_buy"  />  
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">ລາຄາຂາຍ</label>
-                    <input type="text" class="form-control" placeholder="...." v-model="FormStore.price_sell">
+                    <cleave :options="options" class="form-control" placeholder="...." v-model="FormStore.price_sell"  />
                 </div>
             </div>
 
@@ -54,28 +58,40 @@
     </div>
 </div>
 
+<div v-if="!FormShow">
 
+     <div class="row d-flex justify-content-end mb-2">
+            <div class="col-md-3"> 
+                 <input type="text" class=" form-control" placeholder="ຄົ້ນຫາສິນຄ້າ..." v-model="search" @keyup.enter="getStore()" >
+            </div>
+        </div>
+ 
     <div class="table-responsive text-nowrap" v-if="!FormShow">
-        <table class="table table-bordered">
+       
+           
+        </div>
+    <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>ຮູບ</th>
-                    <th>ຊື່ສິນຄ້າ</th>
-                    <th>ລາຄາຊື້</th>
-                    <th>ຈັດການ</th>
+                    <th width="40" class=" text-center">ID</th>
+                    <th width="120" class=" text-center">ຮູບ</th>
+                    <th class=" text-center">ຊື່ສິນຄ້າ</th>
+                    <th width="130" class=" text-center">ລາຄາຊື້</th>
+                    <th width="80" class=" text-center">ຈັດການ</th>
                 </tr>
             </thead>
-            <tbody>
+        <tbody>
 
-        <tr v-for="list in StoreData" :key="list.id">
-          <td>{{ list.id }}</td>
-          <td></td>
+        <tr v-for="list in StoreData.data" :key="list.id">
+          <td class=" text-center">{{ list.id }}</td>
+            <td> <img :src="'assets/img/'+list.image" alt="" class="img-cover" v-if="list.image">
+                 <img :src="'assets/img/no-img.png'" alt="" class="img-cover" v-if="!list.image">
+            </td>
           <td>
             {{ list.name }}
           </td>
-          <td>{{ list.price_buy }}</td>
-          <td>
+          <td class=" text-end">{{ formatPrice(list.price_buy) }}</td>
+          <td class=" text-center">
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
               <div class="dropdown-menu">
@@ -85,12 +101,16 @@
             </div>
           </td>
         </tr>
-      </tbody>
+        </tbody>
     </table>
-  </div>
-</div>
+
+    <pagination :pagination="StoreData" :offset="4" @pagination="getStore($event)" />
 
     </div>
+
+  </div>
+
+</div>
 </template>
 
 <script>
@@ -99,6 +119,10 @@ export default {
 
     data() {
         return {
+
+            imagePreview: window.location.origin+'/assets/img/file-upload.png',
+            image_Product:'',
+
             EditID:'',
             FormShow:false,
             FormType:false,
@@ -108,7 +132,19 @@ export default {
                 price_buy:'',
                 price_sell:''
             },
-            storeData:[],
+            StoreData:[],
+            options:{
+                // prefix: '₭',
+                numeral: true,
+                numeralPositiveOnly: true,
+                noImmediatePrefix: true,
+                rawValueTrimPrefix: true,
+                numeralIntegerScale: 10,
+                numeralDecimalScale: 2,
+                numeralDecimalMark: '.',
+                delimiter: ','
+            },
+            search:'',
         };
     },
 
@@ -128,6 +164,25 @@ export default {
     },
 
     methods: {
+        remove_image(){
+            this.imagePreview = window.location.origin+'/assets/img/file-upload.png'
+            this.image_Product = ''
+        },
+        onSelected(event){
+            // console.log(event.target.files[0])
+            this.image_Product = event.target.files[0]
+
+            let reader = new FileReader();
+            reader.readAsDataURL(this.image_Product);
+            reader.addEventListener("load", function(){
+                this.imagePreview = reader.result;
+            }.bind(this), false);
+        },
+
+        formatPrice(value) {
+            let val = (value / 1 ).toFixed(0).replace(",",".");
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" ກີບ";
+        },
 
         showAlert() {
             // Use sweetalert2
@@ -162,10 +217,12 @@ export default {
                 formDataStore.append("amount", this.FormStore.amount);
                 formDataStore.append("price_buy", this.FormStore.price_buy);
                 formDataStore.append("price_sell", this.FormStore.price_sell);
+                formDataStore.append("file", this.image_Product);
+
                 // formDataStore.append("id", this.EditID);
 
                 this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-                this.$axios.post(`api/store/update/${this.EditID}`, formDataStore).then((response)=>{
+                this.$axios.post(`api/store/update/${this.EditID}`, formDataStore,{Headers:{"content-type":"multipart/form-data"}}).then((response)=>{
 
                     if(response.data.success){
 
@@ -208,9 +265,10 @@ export default {
                 formDataStore.append("amount", this.FormStore.amount);
                 formDataStore.append("price_buy", this.FormStore.price_buy);
                 formDataStore.append("price_sell", this.FormStore.price_sell);
+                formDataStore.append("file", this.image_Product);
 
                 this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-                this.$axios.post("api/store/add", formDataStore).then((response)=>{
+                this.$axios.post("api/store/add", formDataStore,{Headers:{"content-type":"multipart/form-data"}}).then((response)=>{
 
                     if(response.data.success){
 
@@ -268,7 +326,16 @@ export default {
                     this.FormStore.price_buy = response.data.price_buy
                     this.FormStore.price_sell = response.data.price_sell
 
-                    console.log(response.data)
+                    // ນຳຮູບພາບມາເກັບໄວ້
+                    this.image_Product = response.data.image
+                    // ສະແດງຮູບພາບ
+                        if(response.data.image){
+                            this.imagePreview = window.location.origin+'assets/img'+response.data.image
+                        } else {
+                            this.imagePreview = window.location.origin+'/assets/img/file-upload.png'
+                        }
+
+                    // console.log(response.data)
                     this.FormShow = true 
 
                 }).catch((error)=>{
@@ -351,10 +418,10 @@ export default {
             //     })
             // })
         },
-        getStore(){
+        getStore(page){
 
             this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-                this.$axios.get("api/store").then((response)=>{
+                this.$axios.get(`api/store?page=${page}&s=${this.search}`).then((response)=>{
                 this.StoreData = response.data
                 // console.log(response.data)
 
@@ -366,7 +433,7 @@ export default {
                         location.reload()
                     }
 
-                    })
+                })
 
             })
 
@@ -376,6 +443,13 @@ export default {
         }
         
     },
+    watch:{
+        'search'(){
+            if(this.search  == ''){
+                this.getStore()
+            }
+        }
+    },
     created(){
         this.getStore()
     }
@@ -383,6 +457,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+
+    .img-cover{
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        object-position: center;
+
+    }
+
+    .bt.rm{
+        position: absolute;right: 30px;top: 5px;
+    }
 
 </style>
