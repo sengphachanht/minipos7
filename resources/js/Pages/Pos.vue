@@ -9,12 +9,20 @@
                 </div>
                 <div class="row">
 
-                    <div class="col-md-3" v-for="list in StoreData.data" :key="list.index">
-                        <div class="card mb-3">
-                            <div class="num-img">10</div>
-                            <img class="card-img-top img-cover" src="assets/img/elements/18.jpg" alt="Card image cap">
+                    <div class="col-md-3 " v-for="list in StoreData.data" :key="list.index">
+                        <div class="card mb-3 cursor" @click="add_product(list.id)">
+                            <span v-for="i in ListOrder" :key="i.index">
+                                 <div class="num-img" v-if="list.id == i.id">{{i.order_amount}}</div>
+                            </span>
+                           
+                            <!-- <img class="card-img-top img-cover" src="assets/img/elements/18.jpg" alt="Card image cap">
+                            <img class="card-img-top img-cover" src="assets/img/elements/18.jpg" alt="Card image cap"> -->
+
+                            <img :src="'assets/img/'+list.image" alt="" class="card-img-top img-cover" v-if="list.image">
+                            <img :src="'assets/img/no-img.png'" alt="" class="card-img-top img-cover" v-if="!list.image">
+
                             <div class="card-body p-1 text-center">
-                                <strong>{{ list.name}}</strong>
+                                <strong>{{ list.name }}</strong>
                                 <p class="card-text">
                                     {{ formatPrice(list.price_sell)}}
                                 </p>
@@ -28,14 +36,16 @@
                 </div>
             </div>
         <div class="col-md-4">
-            <div class="card">
+            <div class="card" style="height: 80vh; overflow: auto;">
                 <div class="class-body p-3">
-                    <div class=" d-flex justify-content-lg-between fs-4 text-primary">
+                    <div class=" d-flex justify-content-between fs-4 text-primary">
+
                             <span><strong>ລາມຍອດເງິນ:</strong></span>
-                            <span><strong>10,000,000 Kip</strong></span>
+                            <span><strong>{{ formatPrice(TotalAmount) }} </strong></span>
+
                     </div>
 
-                        <button type="button" class="btn rounded-pill btn-info mt-2" style="width:100%">ຊຳລະເງິນ</button>
+                        <button type="button" class="btn rounded-pill btn-info mt-2" :disabled="!TotalAmount" style="width:100%">ຊຳລະເງິນ</button>
 
                         <div class="table-responsive text-nowrap mt-4 border">
                             <table class="table">
@@ -47,11 +57,15 @@
                                     </tr>
                                 </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td>00</td>
-                                <td>11</td>
-                                <td>22</td>
+                            <tr v-for="list in ListOrder" :key="list.index">
+                                <td>{{ list.name }}</td>
+                                <td class="text-end">{{ formatPrice(list.price_sell) }}<br>
+                                  <i class='bx bxs-minus-circle text-warning cursor' @click="remove_product(list.id)"></i>  {{ list.order_amount }} <i class='bx bxs-plus-circle text-info cursor' @click="add_product(list.id)"></i> | <i class='bx bxs-x-circle text-danger cursor' @click="remove_product_one(list.id)"></i>
+                                </td>
+                                <td class="text-end">{{ formatPrice(list.price_sell*list.order_amount) }}</td>
                             </tr>
+                            
+
                         </tbody>
                             </table>
                     </div>
@@ -71,15 +85,70 @@ export default {
         return {
 
             StoreData:[],
-            search:''
+            search:'',
+            ListOrder:[],
         };
     },
 
     mounted() {
         
     },
+    computed:{
+        TotalAmount(){
+            return this.ListOrder.reduce((num,item)=> num + item.price_sell*item.order_amount,0)
+        }
+    },
 
     methods: {
+        add_product(id){
+            
+
+            let item = this.StoreData.data.find((i)=>i.id == id)
+
+            // console.log(item)
+
+            // ກວດຈຳນວນສິນຄ້າໃນສະຕ໋ອກ
+            if(item.amount>0){
+
+                let list_order = this.ListOrder.find((i)=>i.id==id)
+
+                if(list_order){
+                    // console.log(list_order)
+
+                    let old_order = list_order.order_amount
+
+                    if(item.amount - old_order>0){
+                        // ເພີ່ມຈຳນວນຂຶ້ນ 1
+                    list_order.order_amount++
+                    } else {
+                        this.$swal('ສິນຄ້ານີ້','ໝົດແລ້ວ','error')
+                    }
+
+                    } else {
+                    this.ListOrder.push({
+                    id: item.id,
+                    name: item.name,
+                    price_sell: item.price_sell,
+                    order_amount: 1
+                    })
+                }
+            } else {
+                this.$swal('ສິນຄ້ານີ້','ໝົດແລ້ວ','error')
+            }
+            
+        },
+        remove_product(id){
+            let list_order = this.ListOrder.find((i)=>i.id==id)
+            if(list_order){
+                list_order.order_amount--
+                if(list_order.order_amount<1){
+                    this.ListOrder.splice(this.ListOrder.map((i)=>i.id).indexOf(id),1)
+                }
+            }
+        },
+        remove_product_one(id){
+            this.ListOrder.splice(this.ListOrder.map((i)=>i.id).indexOf(id),1)
+        },
         formatPrice(value) {
             let val = (value / 1 ).toFixed(0).replace(",",".");
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" ກີບ";
@@ -116,6 +185,10 @@ export default {
 </script>
 
 <style scoped>
+.cursor{
+    cursor: pointer;
+}
+
 .img-cover{
     height: 110px;
     width: 100%;
@@ -124,8 +197,8 @@ export default {
 }
 .num-img{
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 0px;
+    top: 0px;
     background-color: darkorchid;
     color: white;
     border-radius: 0px 10px 0px 10px;

@@ -120,7 +120,7 @@
               <li>
                 <a class="dropdown-item" href="javascript:void(0)" @click="logout()">
                   <i class="bx bx-power-off me-2"></i>
-                  <span class="align-middle">Log Out</span>
+                  <span class="align-middle">ລົງຊື່ອອກຈາກລະບົບ</span>
                 </a>
               </li>
             </ul>
@@ -229,7 +229,7 @@ export default {
 
                  if(response.data.success){
 
-                    this.$storage.setStorageSync("vue-isLogin",false);
+                    this.$storage.setStorageSync("vue-isLoggin",false);
 
                     window.location.href = window.location,href.replace(/#.*$/,'');
 

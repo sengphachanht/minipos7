@@ -67,7 +67,7 @@ class UserController extends Controller
         } else {
 
             $success = false;
-            $message = "ເຂົ້າສູ່ລະບົບບໍ່ສຳເລັດ!";
+            $message = "ການເຂົ້າສູ່ລະບົບ ບໍ່ສຳເລັດ!";
 
         }
 

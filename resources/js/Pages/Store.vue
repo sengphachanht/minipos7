@@ -6,7 +6,7 @@
                 <h5 class="card-header">ສະຕ໋ອກສິນຄ້າ</h5>
                 <div class=" me-4 pt-3 "> 
                     <!-- {{ check_butom }} -->
-                    <!-- <button class=" btn btn-danger" @click="showAlert">Show</button> -->
+
                     <button type="button" class="btn rounded-pill btn-success me-2 " v-if="FormShow" :disabled="check_butom" @click="save_store()">ບັນທຶກ</button>
                     <button type="button" class="btn rounded-pill btn-danger" v-if="FormShow" @click="close()">ຍົກເລີກ</button>
                     <button type="button" class="btn rounded-pill btn-info" @click="add_store()" v-if="!FormShow">ເພິ່ມ</button>
@@ -56,7 +56,7 @@
         </div>
 
     </div>
-</div>
+
 
 <div v-if="!FormShow">
 
@@ -68,8 +68,6 @@
  
     <div class="table-responsive text-nowrap" v-if="!FormShow">
        
-           
-        </div>
     <table class="table table-bordered">
             <thead>
                 <tr>
@@ -84,7 +82,8 @@
 
         <tr v-for="list in StoreData.data" :key="list.id">
           <td class=" text-center">{{ list.id }}</td>
-            <td> <img :src="'assets/img/'+list.image" alt="" class="img-cover" v-if="list.image">
+            <td> 
+                <img :src="'assets/img/'+list.image" alt="" class="img-cover" v-if="list.image">
                  <img :src="'assets/img/no-img.png'" alt="" class="img-cover" v-if="!list.image">
             </td>
           <td>
@@ -107,10 +106,12 @@
     <pagination :pagination="StoreData" :offset="4" @pagination="getStore($event)" />
 
     </div>
+    </div>
 
   </div>
+  </div>
+  </div>
 
-</div>
 </template>
 
 <script>
@@ -170,7 +171,7 @@ export default {
         },
         onSelected(event){
             // console.log(event.target.files[0])
-            this.image_Product = event.target.files[0]
+            this.image_Product = envet.target.files[0]
 
             let reader = new FileReader();
             reader.readAsDataURL(this.image_Product);

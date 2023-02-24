@@ -102,7 +102,7 @@ export default {
 
     methods: {
         register(){
-            console.log(this.name)
+            // console.log(this.name)
             if(this.name == '' || this.email == '' || this.password == '' || this.password2 == ''){
                     this.show_error = true;
                     this.text_error = 'ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ່ວນ!'

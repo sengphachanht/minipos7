@@ -15,7 +15,7 @@ class StoreController extends Controller
         $search = \Request::get('s');
 
         $store = Store::orderBy('id','asc')
-        // ->where('name','LIKE',"%{$search}%")
+        ->where('name','LIKE',"%{$search}%")
         ->paginate(20)
         ->toArray();
 
@@ -98,7 +98,6 @@ class StoreController extends Controller
                     }
                 } 
 
-                // $upload_path = 'assets/img';
                 $generate_new_name = time().'.'.$request->file->getClientOriginalExtension();
                 $image = $request->file('file');
                 $img = Image::make($image->getRealpath());
@@ -108,9 +107,8 @@ class StoreController extends Controller
 
                 $img->save($upload_path.'/'.$generate_new_name);
 
-
-
                 // ອັບເດດຂໍ້ມູນຮູບພາບ
+
                 $store->update([
                     'name'=>$request->name,
                     'image'=>$generate_new_name,
@@ -129,14 +127,15 @@ class StoreController extends Controller
                         'price_buy'=>$request->price_buy,
                         'price_sell'=>$request->price_sell,
                     ]);
+
                 } else {
 
                     if($store->image){
                         if(file_exists($upload_path.'/'.$store->image)){
                             unlink($upload_path.'/'.$store->image);
                         }
-
                     } 
+
                     $generate_new_name = '';
 
                     $store->update([
@@ -149,12 +148,7 @@ class StoreController extends Controller
 
                 }
 
-                // $generate_new_name = '';
-
-                // $store = Store::find($id);
                 /// ອັບເດດຂໍ້ມູນ ທີ່ບໍ່ມີການອັບໂຫຼດຮູບພາບ
-
-                // if($request->file){
                 //     $store->update([
                 //         'name'=>$request->name,
                 //         'amount'=>$request->amount,
@@ -162,17 +156,12 @@ class StoreController extends Controller
                 //         'price_sell'=>$request->price_sell,
                 //     ]);
 
-                // } 
-            
 
             }
 
                  $success = true;
                 $message = "ອັບເດດຂໍ້ມູນສຳເລັດ!"; 
-                
-
-            
-
+                           
         } catch (\Illuminate\Database\QueryException $ex){
             
             $success = false;
@@ -187,7 +176,6 @@ class StoreController extends Controller
 
         return response()->json($response);
     
-
     }
 
     public function delete($id){

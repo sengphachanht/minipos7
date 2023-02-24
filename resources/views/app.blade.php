@@ -22,6 +22,7 @@
     <!-- Icons. Uncomment required icon fonts -->
     <!-- <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css"> -->
 
+    <!-- ບ໋ອກໄອຄອນ -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     
@@ -48,6 +49,7 @@
                 ];
         @endphp
 
+
     @else
         @php
             $user_auth_data = [
@@ -63,8 +65,7 @@
             </script>
 
 
-    <div id="app-vue">
-    </div>
+    <div id="app-vue"></div>
 
      <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
