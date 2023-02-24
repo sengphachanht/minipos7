@@ -16,7 +16,7 @@ import jp from "./locale/jp.json"
 import vn from "./locale/vn.json"
 
 const i18n = createI18n({
-    locale:'en',
+    locale:'la',
     messages:{
         en: en,
         la: la,

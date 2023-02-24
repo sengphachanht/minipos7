@@ -20263,7 +20263,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$swal.fire({
         title: 'ທ່ານແນ່ໃຈບໍ?',
-        text: "ທີ່ຈະລຶບຂໍ້ຄວາມນີ້!",
+        text: "ທີ່ຈະລຶບລາຍການນີ້!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -20531,7 +20531,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "data-size": "large",
   "data-show-count": "true",
   "aria-label": "Star themeselection/sneat-html-admin-template-free on GitHub"
-}, "Star")], -1 /* HOISTED */);
+}, "ດາວ")], -1 /* HOISTED */);
 var _hoisted_17 = {
   "class": "nav-item navbar-dropdown dropdown-user dropdown"
 };
@@ -20549,7 +20549,7 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_19 = {
   "class": "dropdown-menu dropdown-menu-end"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li><a class=\"dropdown-item\" href=\"#\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar avatar-online\"><img src=\"assets/img/avatars/1.png\" alt=\"\" class=\"w-px-40 h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><span class=\"fw-semibold d-block\">John Doe</span><small class=\"text-muted\">ຜູ້ດູແລລະບົບ</small></div></div></a></li><li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"#\"><i class=\"bx bx-user me-2\"></i><span class=\"align-middle\">ໂປຣໄຟຣ໌</span></a></li><li><a class=\"dropdown-item\" href=\"#\"><i class=\"bx bx-cog me-2\"></i><span class=\"align-middle\">ຕັ້ງຄ່າ</span></a></li><li><a class=\"dropdown-item\" href=\"#\"><span class=\"d-flex align-items-center align-middle\"><i class=\"flex-shrink-0 bx bx-credit-card me-2\"></i><span class=\"flex-grow-1 align-middle\">ບິນ</span><span class=\"flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20\">4</span></span></a></li><li><div class=\"dropdown-divider\"></div></li>", 6);
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li><a class=\"dropdown-item\" href=\"#\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar avatar-online\"><img src=\"assets/img/avatars/1.png\" alt=\"\" class=\"w-px-40 h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><span class=\"fw-semibold d-block\">Seng TS</span><small class=\"text-muted\">ຜູ້ດູແລລະບົບ</small></div></div></a></li><li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"#\"><i class=\"bx bx-user me-2\"></i><span class=\"align-middle\">ໂປຣໄຟຣ໌</span></a></li><li><a class=\"dropdown-item\" href=\"#\"><i class=\"bx bx-cog me-2\"></i><span class=\"align-middle\">ຕັ້ງຄ່າ</span></a></li><li><a class=\"dropdown-item\" href=\"#\"><span class=\"d-flex align-items-center align-middle\"><i class=\"flex-shrink-0 bx bx-credit-card me-2\"></i><span class=\"flex-grow-1 align-middle\">ບິນ</span><span class=\"flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20\">4</span></span></a></li><li><div class=\"dropdown-divider\"></div></li>", 6);
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bx bx-power-off me-2"
 }, null, -1 /* HOISTED */);
@@ -21662,7 +21662,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var i18n = (0,vue_i18n__WEBPACK_IMPORTED_MODULE_15__.createI18n)({
-  locale: 'en',
+  locale: 'la',
   messages: {
     en: _locale_en_json__WEBPACK_IMPORTED_MODULE_10__,
     la: _locale_la_json__WEBPACK_IMPORTED_MODULE_11__,

@@ -349,7 +349,7 @@ export default {
 
                 this.$swal.fire({
                     title: 'ທ່ານແນ່ໃຈບໍ?',
-                    text: "ທີ່ຈະລຶບຂໍ້ຄວາມນີ້!",
+                    text: "ທີ່ຈະລຶບລາຍການນີ້!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
