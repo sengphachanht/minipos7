@@ -62,28 +62,28 @@
     <li class="menu-item ">
       <router-link to="/store" class="menu-link">
         <i class='menu-icon bx bx-home'></i>
-        <div data-i18n="Analytics">ສະຕ໋ອກສິນຄ້າ</div>
+        <div data-i18n="Analytics">{{ $t('store') }}</div>
       </router-link>
     </li>
 
     <li class="menu-item ">
       <router-link to="/pos" class="menu-link">
         <i class='menu-icon bx bx-cart-download' ></i>
-        <div data-i18n="Analytics">ຂາຍ POS</div>
+        <div data-i18n="Analytics">{{ $t('pos') }}</div>
       </router-link>
     </li>
 
         <li class="menu-item ">
       <router-link to="/transection" class="menu-link">
         <i class='menu-icon bx bx-bar-chart-alt-2'></i>
-        <div data-i18n="Analytics">ການເຄື່ອນໄຫວ</div>
+        <div data-i18n="Analytics">{{ $t('transection') }}</div>
       </router-link>
     </li>
 
         <li class="menu-item ">
       <router-link to="/report" class="menu-link">
         <i class='menu-icon bx bx-food-menu'></i>
-        <div data-i18n="Analytics">ລາຍງານ</div>
+        <div data-i18n="Analytics">{{ $t('report') }}</div>
       </router-link>
     </li>
     
