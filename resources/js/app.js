@@ -8,7 +8,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import Cleave from 'vue-cleave-component'
 import Pagination from './components/Pagination.vue'
-import { createI18n} from "vue-i18n"
+import { createI18n } from "vue-i18n"
 import en from "./locale/en.json"
 import la from "./locale/la.json"
 import ch from "./locale/ch.json"

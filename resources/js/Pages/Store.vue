@@ -6,7 +6,7 @@
                 <h5 class="card-header">ສະຕ໋ອກສິນຄ້າ</h5>
                 <div class=" me-4 pt-3 "> 
                     <!-- {{ check_butom }} -->
-
+                    <!-- <button class="btn btn-danger" @click="showAlert">show</button> -->
                     <button type="button" class="btn rounded-pill btn-success me-2 " v-if="FormShow" :disabled="check_butom" @click="save_store()">ບັນທຶກ</button>
                     <button type="button" class="btn rounded-pill btn-danger" v-if="FormShow" @click="close()">ຍົກເລີກ</button>
                     <button type="button" class="btn rounded-pill btn-info" @click="add_store()" v-if="!FormShow">ເພິ່ມ</button>
@@ -62,7 +62,7 @@
 
      <div class="row d-flex justify-content-end mb-2">
             <div class="col-md-3"> 
-                 <input type="text" class=" form-control" placeholder="ຄົ້ນຫາສິນຄ້າ..." v-model="search" @keyup.enter="getStore()" >
+                 <input type="text" class=" form-control input-sm text-center" placeholder="ຄົ້ນຫາສິນຄ້າ..." v-model="search" @keyup.enter="getStore()" >
             </div>
         </div>
  
@@ -103,7 +103,7 @@
         </tbody>
     </table>
 
-    <pagination :pagination="StoreData" :offset="4" @pagination="getStore($event)" />
+    <pagination :pagination="StoreData" :offset="4" @paginate="getStore($event)" />
 
     </div>
     </div>
@@ -169,7 +169,7 @@ export default {
             this.imagePreview = window.location.origin+'/assets/img/file-upload.png'
             this.image_Product = ''
         },
-        onSelected(event){
+        onSelected(envet){
             // console.log(event.target.files[0])
             this.image_Product = envet.target.files[0]
 
@@ -433,16 +433,9 @@ export default {
                         this.$storage.setStorageSync("vue-isLoggin",false);
                         location.reload()
                     }
-
                 })
-
             })
-
-           
-
-            
         }
-        
     },
     watch:{
         'search'(){

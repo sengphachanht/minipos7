@@ -16,7 +16,7 @@ class StoreController extends Controller
 
         $store = Store::orderBy('id','asc')
         ->where('name','LIKE',"%{$search}%")
-        ->paginate(20)
+        ->paginate(5)
         ->toArray();
 
         return array_reverse($store) ;
