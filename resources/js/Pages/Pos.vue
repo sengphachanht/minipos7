@@ -37,11 +37,22 @@
         <div class="col-md-4">
             <div class="card" style="height: 80vh; overflow: auto;">
                 <div class="class-body p-3">
+                    <div class="row">
+                                <div class="col-md-12">
+                                    <label for="">ຊື່ລູກຄ້າ</label>
+                                    <input type="text" class=" form-control" v-model="customer_name">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="">ເບີໂທ</label>
+                                    <input type="text" class=" form-control" v-model="customer_tel">
+                                </div>
+                        </div>
+                        <hr>
                     <div class=" d-flex justify-content-between fs-4 text-primary">                            
                         <span><strong>ລວມຍອດເງິນ:</strong></span>
                         <span><strong>{{ formatPrice(TotalAmount) }} </strong></span>
                     </div>
-                        <button type="button" class="btn rounded-pill btn-info mt-2" :disabled="!TotalAmount" style="width:100%" @click="Confirm_to_pay">ຊຳລະເງິນ</button>
+                        <button type="button" class="btn rounded-pill btn-info mt-2" :disabled="!TotalAmount" style="width:100%" @click="Confirm_to_pay()">ຊຳລະເງິນ</button>
                     <div class="table-responsive text-nowrap mt-4 border">
                         <table class="table">
                             <thead class="table-light">
@@ -67,7 +78,7 @@
         </div>
     </div>
 
-        <div class="modal fade" id="confirm_to_pay" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal fade" id="confirm_to_pay" tabindex="-1" aria-hidden="true" style="display: none;" >
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -170,6 +181,8 @@ export default {
             search:'',
             ListOrder:[],
             CashAmount:'',
+            customer_name:'',
+            customer_tel:''
         };
     },
 
@@ -193,13 +206,23 @@ export default {
         Pay(){
 
             this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-                this.$axios.post(`api/Transection/add`,{
+                this.$axios.post(`api/transection/add`,{
                     acc_type:'income', 
                     listorder: this.ListOrder,
+                    customer_name: this.customer_name,
+                    customer_tel: this.customer_tel
                 }).then((response)=>{
 
                     if(response.data.success){
+
+                    this.customer_name = ''
+                    this.customer_tel =''   
+                    $('#confirm_to_pay').modal('hide')
+                    this.ListOrder = []
                     this.getStore()
+
+                    window.open(window.location.origin+'/api/bills/print/'+response.data.bills_id, "_blank")
+
                     this.$swal.fire({
                         toast:true,
                         position: 'top-end',
@@ -222,8 +245,8 @@ export default {
 
                     }
 
-                    this.getStore()
-                    this.FormShow = false 
+                    // this.getStore()
+                    // this.FormShow = false 
 
                     // console.log(response.data)
                 }).catch((error)=>{
