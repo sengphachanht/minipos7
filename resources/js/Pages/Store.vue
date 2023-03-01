@@ -19,7 +19,7 @@
 
     <div class="row" v-if="FormShow"> 
         <div class="col-md-4 text-center">
-            <div style="position: relative; ">
+            <div style="position: relative;">
                 <button type="button" class="btn rounded-pill btn-icon btn-danger bt-rm" @click="remove_image()" v-if="image_Product" >
                  <i class='bx bx-x-circle fs-2'></i>
               </button>
@@ -84,7 +84,7 @@
           <td class=" text-center">{{ list.id }}</td>
             <td> 
                 <img :src="'assets/img/'+list.image" alt="" class="img-cover" v-if="list.image">
-                 <img :src="'assets/img/no-img.png'" alt="" class="img-cover" v-if="!list.image">
+                <img :src="'assets/img/no-img.png'" alt="" class="img-cover" v-if="!list.image">
             </td>
           <td>
             {{ list.name }}
@@ -331,7 +331,7 @@ export default {
                     this.image_Product = response.data.image
                     // ສະແດງຮູບພາບ
                         if(response.data.image){
-                            this.imagePreview = window.location.origin+'assets/img'+response.data.image
+                            this.imagePreview = window.location.origin+'/assets/img/'+response.data.image
                         } else {
                             this.imagePreview = window.location.origin+'/assets/img/file-upload.png'
                         }
@@ -461,7 +461,7 @@ export default {
 
     }
 
-    .bt.rm{
+    .bt-rm{
         position: absolute;right: 30px;top: 5px;
     }
 

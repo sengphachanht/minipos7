@@ -16,7 +16,7 @@ class StoreController extends Controller
 
         $store = Store::orderBy('id','asc')
         ->where('name','LIKE',"%{$search}%")
-        ->paginate(5)
+        ->paginate(15)
         ->toArray();
 
         return array_reverse($store) ;
@@ -119,6 +119,7 @@ class StoreController extends Controller
 
             } else {
 
+                /// ອັບເດດຂໍ້ມູນ ທີ່ບໍ່ມີການອັບໂຫຼດຮູບພາບ
                 if($request->file){
                     $store->update([
                         'name'=>$request->name,
