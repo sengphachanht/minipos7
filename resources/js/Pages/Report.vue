@@ -1,63 +1,52 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col-md-8">
-
-                <div class="card">
-  <h5 class="card-header">ສະຫຼຸບລາຍຮັບ-ລາຍຈ່າຍ</h5>
-  <div class=" d-flex justify-content-end">
-    
-              <div class="btn-group me-2" role="group" aria-label="Basic example"> 
-                <!-- {{month_type}} -->
-                <button type="button" class="btn btn-secondary" @click="month_type='m'"><i class='bx bx-chevron-right' v-if="month_type=='m'"></i>ເດືອນ</button>
-                <button type="button" class="btn btn-secondary" @click="month_type='y'"><i class='bx bx-chevron-right' v-if="month_type=='y'"></i>ປີ</button>
-              </div>
-
-    <input type="date" class="form-control me-2" style="width: 150px;" v-model="dmy">
-    <button type="button" class="btn btn-success me-4" @click="CreateReport()">ສະແດງລາຍງານ</button>
-  </div>
-  <div class="card-body">
-
-            <!-- <MonthlyChart/> -->
-            <Linechart :chartData="chdata" :chartOption="choption" :update="update_chart" :key="key" v-if="show_chart"/>
-
-  </div>
-</div>
-
+  <div>
+    <div class="row"> 
+      <div class="col-md-8">
+        <div class="card">
+            <h5 class="card-header">ສະຫຼຸບລາຍຮັບ-ລາຍຈ່າຍ</h5>
+          <div class=" d-flex justify-content-end">
+            <div class="btn-group me-2" role="group" aria-label="Basic example"> 
+              <!-- {{month_type}} -->
+              <button type="button" class="btn btn-secondary" @click="month_type='m'"><i class='bx bx-chevron-right' v-if="month_type=='m'"></i>ເດືອນ</button>
+              <button type="button" class="btn btn-secondary" @click="month_type='y'"><i class='bx bx-chevron-right' v-if="month_type=='y'"></i>ປີ</button>
             </div>
-            <div class="col-md-4">
-
-                <div class="card mb-4">
-                    <div class="card-body">
-                            <div class=" d-flex justify-content-between">
-                                <span><i class='bx bxs-wallet-alt' ></i> <br> ລາຍຮັບ</span>
-                                <span>{{ formatPrice(sum_income) }}</span>
-                            </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                    <div class="card-body">
-                            <div class=" d-flex justify-content-between">
-                                <span><i class='bx bxs-wallet-alt' ></i> <br> ລາຍຈ່າຍ</span>
-                                <span>{{ formatPrice(sum_expense) }}</span>
-                            </div>
-                </div>
-            </div>
-            <div class="card">
-                    <div class="card-body">
-                            <div class=" d-flex justify-content-between">
-                                <span><i class='bx bxs-wallet-alt' ></i> <br> ກຳໄລ</span>
-                                <span>{{ formatPrice(sum_profit) }}</span>
-                            </div>
-                </div>
-            </div>
-
+              <input type="date" class="form-control me-2" style="width: 150px;" v-model="dmy">
+              <button type="button" class="btn btn-success me-4" @click="CreateReport()">ສະແດງລາຍງານ</button>
+          </div>             
+            <div class="card-body">
+              <!-- <MonthlyChart/> -->
+              <Linechart :chartData="chdata" :chartOption="choption" :update="update_chart" :key="key" v-if="show_chart"/>
             </div>
         </div>
-        
-        
-
+      </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body ">
+              <div class=" d-flex justify-content-between">
+                <span><i class='bx bxs-wallet-alt' ></i> <br> ລາຍຮັບ</span>
+                <span>{{ formatPrice(sum_income) }}</span>
+              </div>
+            </div>
+          </div>
+            <div class="card mb-4 ">
+              <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                  <span><i class='bx bxs-wallet-alt' ></i> <br> ລາຍຈ່າຍ</span>
+                  <span>{{ formatPrice(sum_expense) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                  <span><i class='bx bxs-wallet-alt' ></i> <br> ກຳໄລ</span>
+                  <span>{{ formatPrice(sum_profit) }}</span>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
+  </div>
 </template>
 
 <script>
